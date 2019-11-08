@@ -67,6 +67,33 @@
         高并发的时候，注意产生图片的速度
         api很多，需要多练习
        
-**3.**
+**3.docx文件：**
     
+    1.以Microsoft Office的doc为主要处理对象
+    2.word2003之前都是doc，文档格式不公开
+    3.word2007之后都是docx，遵循xml路线，文档格式公开
+    4.docx为主要研究对象
+        -文字样式
+        -表格
+        -图片
+        -公式
+    5.常见功能：
+        -docx解析
+        -docx生成：完全生成 模板加部分生成
+    6.处理第三方库：
+        -jacob，COM4j(两者都调用windows平台的com组件)
+        -POI，doc4j，OpenOffice/libre Office SDK （全部免费）   
+        -Aspose(收费的)
+        -一些开源的OpenXMl包
+    7.主要介绍：POI
+        1.Apache出品，poi.apache.org
+        2.可处理docx，xlsx，pptx，visio等office套件
+        3.纯java工具包，无需第三方依赖
+        4.主要类：
+            XWPFDocument：整个文档对象
+            XWPFParagraph：段落
+            XWPFRun：一个片段
+            XWPFPicture：图片
+            XWPFTable：表格
+    8.
     
