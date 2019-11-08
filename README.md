@@ -122,5 +122,32 @@
             -解析文档 CSVParser
             -一行记录 CSVRecord
             -写入文档 CSVPrinter
+
+**4.pdf文件：**    
     
-    
+    1，介绍：
+        1.Portable Document Format的简称，意思为 便携式文档格式
+        2.Adobe公司发明的
+        3.PostScript，用以生成和输出图形，在任何打印机上都可保证精确地颜色和准确地打印效果
+        4.字形嵌入系统，可使字型随文件一起传输
+        5.结构化的存储系统，绑定元素和任何相关内容到单个文件
+        6.版本：一般为1.4+
+    2.pdf处理
+        1.常见功能
+            -解析
+            -生成
+        2.第三方包：
+            -免费：Apache PDFBox           pdfbox.apache.org
+            -收费：iText                   itextpdf.com/en
+            -XdocReport(将docx转化为pdf)   github.com/opensagres/xdocreport 
+    3.Apache PDFBox :
+        1.纯java类库
+        2.主要功能：春节，提取文本，分隔,合并、删除
+        3.主要类
+            ·PDDocument         PDF文档对象
+            ·PDFTextStripper    pdf文本对象
+            ·PDFMergerUtility   合并工具
+    4.XdocReport：
+        1.将docx文档合并输出为其他数据格式（pdf、html）
+        2.PdfConverter
+        3.基于poi和iText完成
