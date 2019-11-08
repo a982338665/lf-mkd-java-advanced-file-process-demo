@@ -45,5 +45,7 @@
     <orderEntry type="library" name="Maven: org.apache.pdfbox:xmpbox:2.0.13" level="project" />
     <orderEntry type="library" name="Maven: com.itextpdf:itextpdf:5.5.13" level="project" />
     <orderEntry type="library" name="Maven: javax.servlet:javax.servlet-api:3.1.0" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.bcel:bcel:5.2" level="project" />
+    <orderEntry type="library" name="Maven: jakarta-regexp:jakarta-regexp:1.4" level="project" />
   </component>
 </module>
