@@ -95,5 +95,32 @@
             XWPFRun：一个片段
             XWPFPicture：图片
             XWPFTable：表格
-    8.
+    8.可能会用于准考证打印，文档替换生成等
+    
+**4.表格文件：**
+    
+    1.xls/xlsx文件：excel生成，xlsx以xml为标准，主要研究
+    2.csv文件：以逗号分隔的文本文件
+    3.数据：
+        sheet：行，列，单元格
+    4.常见功能
+        -解析
+        -生成
+    5.第三方包：poi较流行，早期使用jxl
+        -免费：POI，jxl
+        -windows：com4j
+        -收费：Aspose
+    6.主要类：
+        ·XSSFWorkbook   整个文档对象
+        ·XSSFSheet      单个sheet对象
+        ·XSSFRow        一行对象
+        ·XSSFCell       一个单元格对象
+    7.csv文件：用来存储文本数据，可以文本文件打开，也可以excel打开
+        广义csv文件：可以由空格、tab键，分等完成字段分隔
+        第三方包：Apache Commons CSV
+            -文档格式 CSVFormat
+            -解析文档 CSVParser
+            -一行记录 CSVRecord
+            -写入文档 CSVPrinter
+    
     
