@@ -120,11 +120,15 @@
             <version>5.5.13</version>
         </dependency>
 
+        <!--
+        provided适合在编译和测试的环境，他和compile很接近，但是provide仅仅需要在编译和测试阶段，同样provide将不会被打包到lib目录下。
+        现在能给出的判断结果是,在使用main方法进行测试的时候,缺少javax/servlet/ServletOutputStream包,然后进行导入后,
+        忘记去掉provided这个标签,因为main方法进行测试所处于的环境应该不属于编译或者测试环境.-->
         <dependency>
             <groupId>javax.servlet</groupId>
-            <artifactId>servlet-api</artifactId>
-            <version>2.5</version>
-            <scope>provided</scope>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>3.1.0</version>
+            <!--<scope>provided</scope>-->
         </dependency>
     </dependencies>
 
