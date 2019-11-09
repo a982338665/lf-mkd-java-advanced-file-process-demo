@@ -1,20 +1,23 @@
 package pers.li.util;
 
-import org.apache.bcel.generic.BasicType;
-import org.apache.bcel.generic.Type;
 import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
-import java.io.*;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
 import java.lang.reflect.Field;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 /**
  * Excel导出
  */
 public class ExcelUtil {
+
+    public static SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss:SSS");
 
     public static <T> XSSFWorkbook getWorkbook(Collection<T> dataSet, String[] params, String[] titles) {
         // 校验变量和预期输出excel列数是否相同
@@ -66,18 +69,28 @@ public class ExcelUtil {
     // 根据需要输出的变量名数组获取属性值
     public static String[] getValues(Object object, String[] params) {
         String[] values = new String[params.length];
+//        HashSet<Object> objects = new HashSet<>();
         try {
             for (int i = 0; i < params.length; i++) {
                 Field field = object.getClass().getDeclaredField(params[i]);
                 // 设置访问权限为true
                 field.setAccessible(true);
                 // 获取属性
-                // 如果属性有涉及基本变量的做一个转换
-                Class<? extends BasicType> aClass = Type.INT.getClass();
-                if (field.getType() == aClass)
+                Class<?> type = field.getType();
+//                objects.add(type);
+//                System.err.println("type=" + type);
+//                System.out.println(type == String.class);
+                if (type == int.class) {
                     values[i] = String.valueOf((int) field.get(object));
-                values[i] = field.get(object).toString();
+//                    System.err.println(int.class == Integer.class);
+                } else if (type == Date.class) {
+                    String format = sdf.format((Date) field.get(object));
+                    values[i] = format;
+                } else {
+                    values[i] = field.get(object).toString();
+                }
             }
+//            System.err.println(objects.toString());;
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -86,12 +99,13 @@ public class ExcelUtil {
 
     public static void main(String[] args) {
         List<Person> list = new ArrayList<>();
-        list.add(new Person("张三", 15, "学生"));
-        list.add(new Person("李四", 20, "实习生"));
-        list.add(new Person("王五", 26, "Java工程师"));
-        list.add(new Person("小明", 30, "主管"));
+//        	public Person(String name, int age, String job, Integer num, Date createTime, boolean aBoolean, Double aDouble) {
+        list.add(new Person("张三", 15, "学生", 24,new Date(), 2.333, false));
+        list.add(new Person("李四", 20, "实习生", 23,new Date(), 3.444, true));
+        list.add(new Person("王五", 26, "Java工程师", 45,new Date(), 3.444, true));
+        list.add(new Person("小明", 30, "主管",44, new Date(), 3.444, true));
 
-        XSSFWorkbook workbook = getWorkbook(list, new String[]{"name", "age", "job"}, new String[]{"姓名", "年龄", "职业"});
+        XSSFWorkbook workbook = getWorkbook(list, new String[]{"name", "age", "job","num", "createTime", "aDouble", "aBoolean"}, new String[]{"姓名", "年龄", "职业", "数量","创建时间", "double", "boolean"});
         if (workbook != null) {
             try {
                 OutputStream out = new FileOutputStream("D://TestOutputExcel.xlsx");
