@@ -152,3 +152,9 @@
         1.将docx文档合并输出为其他数据格式（pdf、html）
         2.PdfConverter
         3.基于poi和iText完成
+
+
+**1.excel导出方式比较对比：**
+    
+    xml导出方式最快 - 优选
+    poi次之
