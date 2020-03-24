@@ -20,8 +20,25 @@ import java.util.regex.Pattern;
  *
  * @program: api
  * @description:
- * @author: GJQ
- * @create: 2020-03-23 20:46
+ * 测试用例：
+ *     @Resource
+ *     private HttpServletResponse res;
+ *     @RequestMapping(value = "/exclExport", method = RequestMethod.GET)
+ *     @SneakyThrows
+ *     public void ExclExport() {
+ *         List<User> userList = userService.queryAllByLimit(1, 100000);
+ *         String[] headers = { "用户名", "用户密码", "用户编码", "创建人", "创建时间"};
+ *         String[] includeFieldNames = { "userName", "userPwd", "userCode", "createUser", "createTime"};
+ *         String fileNames = "用户列表.xls";
+ *         // 导出订单Excel
+ *         ExportUtil exportUtil = new ExportUtil();
+ *         //有异常
+ *         String s = exportUtil.exportExcel("sheet", "用户表", userList, headers, includeFieldNames);
+ *         // 设置文件后缀并编码
+ *         exportUtil.exportExcelDataFinal(res, fileNames,s );
+ *     }
+ *
+ *
  **/
 public class ExportUtil2 {
 
@@ -297,5 +314,10 @@ public class ExportUtil2 {
         out.close();
     }
 
+    public static void main(String[] args) {
+        /**
+         * 测试用例：
+         */
+    }
 
 }
