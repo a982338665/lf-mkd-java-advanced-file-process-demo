@@ -158,3 +158,25 @@
     
     xml导出方式最快 - 优选
     poi次之
+    
+ **3.excel读取写入：**
+ 
+    <!-- 引入poi，解析workbook视图 -->
+    <dependency>
+        <groupId>org.apache.poi</groupId>
+        <artifactId>poi</artifactId>
+        <version>3.16</version>
+    </dependency>
+    <dependency>
+        <groupId>org.apache.poi</groupId>
+        <artifactId>poi-ooxml</artifactId>
+        <version>3.14</version>
+    </dependency>
+    <!-- 处理excel和上面功能是一样的-->
+    <dependency>
+        <groupId>net.sourceforge.jexcelapi</groupId>
+        <artifactId>jxl</artifactId>
+        <version>2.6.10</version>
+    </dependency>
+    
+    
