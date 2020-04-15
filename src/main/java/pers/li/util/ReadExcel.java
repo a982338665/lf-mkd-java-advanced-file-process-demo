@@ -8,11 +8,14 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 只能读取xls格式的
+ */
 public class ReadExcel {
     public static void main(String[] args) {
         ReadExcel obj = new ReadExcel();
         // 此处为我创建Excel路径：E:/zhanhj/studysrc/jxl下
-        File file = new File("D:/readExcel.xls");
+        File file = new File("D://3.xls");
         List excelList = obj.readExcel(file);
         System.out.println("list中的数据打印出来");
         for (int i = 0; i < excelList.size(); i++) {
@@ -29,7 +32,7 @@ public class ReadExcel {
         try {
             // 创建输入流，读取Excel
             InputStream is = new FileInputStream(file.getAbsolutePath());
-            // jxl提供的Workbook类
+            // jxl提供的Workbook类,
             Workbook wb = Workbook.getWorkbook(is);
             // Excel的页签数量
             int sheet_size = wb.getNumberOfSheets();

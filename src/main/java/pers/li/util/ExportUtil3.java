@@ -1,3 +1,4 @@
+/*
 package pers.li.util;
 
 import lombok.Cleanup;
@@ -18,6 +19,7 @@ import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+*/
 /**
  * exportUtil.exportExcel("sheet", "用户表", userList, headers, includeFieldNames, new Integer[]{200}, res.getOutputStream(), null);
  *
@@ -34,7 +36,8 @@ import java.util.regex.Pattern;
  *         String s = exportUtil.exportExcel(list, PurchaseApplyVoExport.class);
  *         exportUtil.exportExcelDataFinal(res, "导出请购申请.xls", s);
  *     }
- **/
+ **//*
+
 public class ExportUtil3 {
 
 
@@ -45,7 +48,8 @@ public class ExportUtil3 {
     private String[] head = null;
     private String[] colume = null;
 
-    /**
+    */
+/**
      * @param sheetName         sheel名称
      * @param firstRowTitle     头名称（可空）
      * @param list              内容对象数组
@@ -55,7 +59,8 @@ public class ExportUtil3 {
      * @param datetimePattern   时间输入格式默认 yyyy-MM-dd HH:mm:ss
      * @param <T>
      * @throws Exception
-     */
+     *//*
+
     public <T> String exportExcel(String sheetName, String firstRowTitle, List<T> list, String[] headers, String[] includeFieldNames, Integer[] widths,
                                   String datetimePattern) throws Exception {
         StringBuffer sb = makeStyle();
@@ -268,13 +273,17 @@ public class ExportUtil3 {
 
         sb.append("<Styles>\n");
 
-        /*设置列头样式*/
+        */
+/*设置列头样式*//*
+
         sb.append("<Style ss:ID=\"header\" ss:Name=\"header\">\n");//ss:ID=“header”对应下面的Row ss:StyleID=“header”
         sb.append("<Interior ss:Color=\"#cccccc\" ss:Pattern=\"Solid\"/>\n");// 设置背景颜色
         sb.append("<Font ss:FontName=\"微软雅黑\" x:CharSet=\"134\" ss:Bold=\"Bolder\" ss:Size=\"12\"/>\n");//设置字体
         sb.append("</Style>\n");
 
-        /*其它默认样式设置*/
+        */
+/*其它默认样式设置*//*
+
         sb.append("<Style ss:ID=\"Default\" ss:Name=\"Normal\">\n");
         //sb.append("<Alignment ss:Vertical=\"Center\"/>\n");
         sb.append("<Alignment ss:Horizontal=\"Center\" ss:Vertical=\"Center\" ss:WrapText=\"1\"/>\n");// 左中右设置，一个是水平，一个是垂直
@@ -350,3 +359,4 @@ public class ExportUtil3 {
     }
 
 }
+*/
