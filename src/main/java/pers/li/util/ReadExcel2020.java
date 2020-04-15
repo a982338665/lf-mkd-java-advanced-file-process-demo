@@ -12,7 +12,7 @@ import java.io.FileInputStream;
 import java.io.InputStream;
 
 /**
- * 仅支持xlsx数据读取
+ * 仅支持xlsx,xls数据读取
  */
 public class ReadExcel2020 {
 
@@ -20,8 +20,8 @@ public class ReadExcel2020 {
 
         ReadExcel2020 excelTest=new ReadExcel2020();
 
-        Workbook wb = excelTest.getExcel("D://4.xlsx");
-//        Workbook wb = excelTest.getExcel("D://3.xls");
+//        Workbook wb = excelTest.getExcel("D://4.xlsx");
+        Workbook wb = excelTest.getExcel("D://33.xls");
 
         if(wb==null)
             System.out.println("文件读入出错");
