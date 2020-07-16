@@ -28,7 +28,7 @@ public class RowSpanTable {
         mergeCellsVertically(table, 3, 1, 3);
 
         try {
-            FileOutputStream out = new FileOutputStream("c:/temp/rowSpanTable.docx");
+            FileOutputStream out = new FileOutputStream("./rowSpanTable.docx");
             document.write(out);
             out.close();
         } catch (IOException e) {

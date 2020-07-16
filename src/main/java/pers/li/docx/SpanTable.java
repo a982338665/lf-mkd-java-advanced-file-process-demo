@@ -57,7 +57,7 @@ public class SpanTable {
 
 			table.setWidth(120);
 
-			file = new File("c:/temp/spantable.docx");
+			file = new File("./spantable.docx");
 			if (file.exists())
 				file.delete();
 

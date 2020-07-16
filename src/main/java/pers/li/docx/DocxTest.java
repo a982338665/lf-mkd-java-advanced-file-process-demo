@@ -14,14 +14,19 @@ import java.math.BigInteger;
  * @URL : CSDN 皇夜_
  * @createTime : 2020/7/16 17:57
  * @Description :
+ * http://poi.apache.org/apidocs/dev/
  */
 public class DocxTest {
+
+    public static void main(String[] args) throws Exception {
+        new DocxTest().test();
+    }
 
     public void test() throws Exception {
         int level = 1;
         String styleName = "标题 1";
         String name = "标题内容";
-        String filePath = "C:/Users/Desktop/0530测试.docx";
+        String filePath = "./0530.docx";
         // 获得word的pack对象
         OPCPackage pack = POIXMLDocument.openPackage( filePath );
         // 获得XWPFDocument对象
@@ -43,7 +48,7 @@ public class DocxTest {
         run.setFontSize( 20 );
         run.addBreak( BreakType.TEXT_WRAPPING );
         // 生成的标题文件
-        File newFile = new File( "C:/Users/Desktop/222.docx" );
+        File newFile = new File( "./222.docx" );
         FileOutputStream fos = new FileOutputStream( newFile );
         doc.write( fos );
         fos.flush();
