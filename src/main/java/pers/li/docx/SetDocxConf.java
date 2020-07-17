@@ -42,6 +42,14 @@ public class SetDocxConf {
     private String interType = "【请求类型】：";
     private String interReq = "【请求参数】：";
     private String interRes = "【响应参数】：";
+    private String interExample = "【请求示例】：";
+
+    /**
+     * 示例中表格的列内容
+     */
+    private String interReqExample = "请求参数";
+    private String interResExample = "响应参数";
+
 
 
     /**
@@ -50,7 +58,7 @@ public class SetDocxConf {
     /**
      * 行间距
      */
-    private int textPosition = 0;
+    private int textPosition = 2;
     /**
      * 标题字体
      */
@@ -63,6 +71,33 @@ public class SetDocxConf {
      * 内容字体
      */
     private String textContentFont = "宋体";
+    /**
+     * 文档主题目大小
+     */
+    private int textMainTitleFontSize = 26;
+    /**
+     * 文档1级标题大小
+     */
+    private int textFirstTitleFontSize = 22;
+    /**
+     * 文档2级标题大小
+     */
+    private int textSecondTitleFontSize = 18;
+    /**
+     * 文档3级标题大小
+     */
+    private int textThreeTitleFontSize = 14;
+    /**
+     * 文档4级标题大小
+     */
+    private int textFourTitleFontSize = 10;
+    /**
+     * 文本大小
+     */
+    private int textFontSize = 12;
+
+
+
 
     /**
      * 请求参数列表行头颜色
@@ -80,6 +115,15 @@ public class SetDocxConf {
      * 响应参数列表行体颜色
      */
     private String resBodyColor = "CCCCCC";
+    /**
+     * 请求示例 的第一列颜色
+     */
+    private String resExampleFirstCellColor = "B4ACC6";
+    /**
+     * 请求示例 的其他列颜色
+     */
+    private String resExampleOtherCellColor = "CCCCCC";
+
 
     private SetDocxConf() {
 

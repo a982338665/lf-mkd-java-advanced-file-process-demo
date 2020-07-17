@@ -29,14 +29,16 @@ public class DocxUtils {
         reqList.add(mreqMap);
         reqList.add(mreqMap);
         reqList.add(mreqMap);
-
-
         SetDocxConf instance = SetDocxConf.getInstance();
         Map<String, List<Map<String, Object>>> mapp = new HashMap<>();
         List<Map<String, Object>> list = new ArrayList<>();
-        addList(list, reqList, reqList, "老师新建接口", "老师新建接口", "/_API_API_API_API_API_API_API_API_API/xkexternalimport/addTeacher", "Get", "application/json");
-        addList(list, reqList, reqList, "老师新建接口", "老师新建接口", "2_EXTERNAL_API/xkexternalimport/addTeacher", "Get", "application/json");
-        addList(list, reqList, reqList, "老师新建接口", "老师新建接口", "EXTERNAL_API/xkexternalimport/addTeacher", "Get", "application/json");
+        String req1 = "--header 'Authorization:string' -d '[{\"age\":0,\"createTime\":\"2020/01/01 00:00:00\",\"deleted\":0,\"email\":\"string\",\"id\":0,\"managerId\":0,\"name\":\"string\"," +
+                "\"updateTime\":\"2020/01/01 00:00:00\",\"version\":0}]'";
+        String res1 = "{\"usersArray\":[{\"age\":0,\"createTime\":\"2020/01/01 00:00:00\",\"deleted\":0,\"email\":\"string\",\"id\":0,\"managerId\":0,\"name\":\"string\"," +
+                "\"updateTime\":\"2020/01/01 00:00:00\",\"version\":0}],\"money\":null,\"array\":[{}],\"time\":{},\"testVo\":{},\"age\":0,\"testVos\":[{}]}";
+        addList(list, reqList, reqList, "老师新建接口", "老师新建接口", "/_API_API_API_API_API_API_API_API_API/xkexternalimport/addTeacher", "Get", "application/json", req1, res1);
+        addList(list, reqList, reqList, "老师新建接口", "老师新建接口", "2_EXTERNAL_API/xkexternalimport/addTeacher", "Get", "application/json", req1, res1);
+        addList(list, reqList, reqList, "老师新建接口", "老师新建接口", "EXTERNAL_API/xkexternalimport/addTeacher", "Get", "application/json", req1, res1);
         mapp.put("1级标题测试" + SetDocxConf.getInstance().getSplitTitle() + UUID.randomUUID(), list);
         mapp.put("1级标题测试" + SetDocxConf.getInstance().getSplitTitle() + UUID.randomUUID(), list);
         //头部信息
@@ -49,6 +51,11 @@ public class DocxUtils {
         map.put(GetDocxConf.INDEX_URL, "http://pingpingpang.cn");
         map.put(GetDocxConf.INDEX_EMAIL, "982338665@qq.com");
         map.put(GetDocxConf.INDEX_TIME, "2020 07-17");
+        generateDoc(instance, mapp, map);
+
+    }
+
+    private static void generateDoc(SetDocxConf instance, Map<String, List<Map<String, Object>>> mapp, Map<String, String> map) {
         try (
                 XWPFDocument doc = new XWPFDocument();
                 //组装文件名称
@@ -68,29 +75,30 @@ public class DocxUtils {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
     }
 
     private static void addIndexDocx(SetDocxConf instance, Map<String, String> map, XWPFDocument doc) {
+        int titleSize = SetDocxConf.getInstance().getTextFirstTitleFontSize();
+        int textSize = SetDocxConf.getInstance().getTextFontSize();
         //添加一级标题
         XWPFParagraph paragraph1 = doc.createParagraph();
         paragraph1.setStyle("heading1");
-        addInsertNewRun(paragraph1, 22, true, "1.".concat(instance.getFirstName()), true, false);
+        addInsertNewRun(paragraph1, titleSize, true, "1.".concat(instance.getFirstName()), true, false);
         //添加一级标题下的内容
         XWPFParagraph paragraph1c = doc.createParagraph();
-        addInsertNewRun(paragraph1c, 12, false, instance.getDocxDesc().concat(map.get(GetDocxConf.INDEX_DESC)), true, false);
-        addInsertNewRun(paragraph1c, 12, false, instance.getDocxVersion().concat(map.get(GetDocxConf.INDEX_VERSIONDOCX)), true, false);
-        addInsertNewRun(paragraph1c, 12, false, instance.getSwaggVersion().concat(map.get(GetDocxConf.INDEX_VERSIONSWAGGER)), true, false);
-        addInsertNewRun(paragraph1c, 12, false, instance.getContactName().concat(map.get(GetDocxConf.INDEX_NAME)), true, false);
-        addInsertNewRun(paragraph1c, 12, false, instance.getContactEmail().concat(map.get(GetDocxConf.INDEX_EMAIL)), true, false);
-        addInsertNewRun(paragraph1c, 12, false, instance.getContactUrl().concat(map.get(GetDocxConf.INDEX_URL)), true, false);
-        addInsertNewRun(paragraph1c, 12, false, instance.getDocxTime().concat(map.get(GetDocxConf.INDEX_TIME)), true, false);
+        addInsertNewRun(paragraph1c, textSize, false, instance.getDocxDesc().concat(map.get(GetDocxConf.INDEX_DESC)), true, false);
+        addInsertNewRun(paragraph1c, textSize, false, instance.getDocxVersion().concat(map.get(GetDocxConf.INDEX_VERSIONDOCX)), true, false);
+        addInsertNewRun(paragraph1c, textSize, false, instance.getSwaggVersion().concat(map.get(GetDocxConf.INDEX_VERSIONSWAGGER)), true, false);
+        addInsertNewRun(paragraph1c, textSize, false, instance.getContactName().concat(map.get(GetDocxConf.INDEX_NAME)), true, false);
+        addInsertNewRun(paragraph1c, textSize, false, instance.getContactEmail().concat(map.get(GetDocxConf.INDEX_EMAIL)), true, false);
+        addInsertNewRun(paragraph1c, textSize, false, instance.getContactUrl().concat(map.get(GetDocxConf.INDEX_URL)), true, false);
+        addInsertNewRun(paragraph1c, textSize, false, instance.getDocxTime().concat(map.get(GetDocxConf.INDEX_TIME)), true, false);
     }
 
     private static void addDocxTitle(Map<String, String> map, XWPFDocument doc) {
         XWPFParagraph ptitle1 = doc.createParagraph();
         ptitle1.setAlignment(ParagraphAlignment.CENTER);
-        addInsertNewRun(ptitle1, 26, true, map.get(GetDocxConf.INDEX_TITLE), true, false);
+        addInsertNewRun(ptitle1, SetDocxConf.getInstance().getTextMainTitleFontSize(), true, map.get(GetDocxConf.INDEX_TITLE), true, false);
     }
 
     public static void addList(List<Map<String, Object>> list, List<Map<String, Object>> reqList, List<Map<String, Object>> resList, String... param) {
@@ -102,6 +110,8 @@ public class DocxUtils {
         map.put(GetDocxConf.INTERFACE_REQ, reqList);
         map.put(GetDocxConf.INTERFACE_RES, resList);
         map.put(GetDocxConf.INTERFACE_TYPE, param[4]);
+        map.put(GetDocxConf.INTERFACE_REQ_EXAMPLE, param[5]);
+        map.put(GetDocxConf.INTERFACE_RES_EXAMPLE, param[6]);
         list.add(map);
     }
 
@@ -119,6 +129,8 @@ public class DocxUtils {
                 String method = map.get(GetDocxConf.INTERFACE_METHOD).toString();
                 String url = map.get(GetDocxConf.INTERFACE_URL).toString();
                 String type = map.get(GetDocxConf.INTERFACE_TYPE).toString();
+                String reqexam = map.get(GetDocxConf.INTERFACE_REQ_EXAMPLE).toString();
+                String resexam = map.get(GetDocxConf.INTERFACE_RES_EXAMPLE).toString();
                 Object o = map.get(GetDocxConf.INTERFACE_REQ);
                 List<Map<String, Object>> req = (List<Map<String, Object>>) o;
                 Object o1 = map.get(GetDocxConf.INTERFACE_RES);
@@ -131,73 +143,97 @@ public class DocxUtils {
                 String ptype = new StringBuilder().append(instance.getInterType()).append(type).toString();
                 String preq = instance.getInterReq();
                 String pres = instance.getInterRes();
+                String pexample = instance.getInterExample();
                 //添加二级标题
                 addSecondTitle(doc, title);
-                //添加内容
+                //添加头内容
                 addInterfaceContent(doc, pdesc, purl, pmethod, ptype, preq);
-                //创建表格
-//                XWPFTable table = doc.createTable(50, 5);
-                XWPFTable table = doc.createTable();
-                CTTblWidth width = table.getCTTbl().addNewTblPr().addNewTblW();
-                width.setType(STTblWidth.DXA);
-                width.setW(BigInteger.valueOf(10000));
-                // create first row
-                XWPFTableRow tableRowOne = table.getRow(0);
+                //创建请求参数表格
+                addResPraramTable(doc, req, instance);
+                //响应参数
+                addInterfaceResponse(doc, pres);
+                //创建响应参数表格
+                addResParamTable(doc, res, instance);
+                //请求示例
+                addInterfaceResponse(doc, pexample);
+                //创建示例表格
+                addExample(doc, reqexam, resexam, instance);
+            }
+        }
+    }
 
-                setCellText(tableRowOne.getCell(0), GetDocxConf.REQ_NAME, -1, true, 6, instance.getReqRowColor());
-                setCellText(tableRowOne.addNewTableCell(), GetDocxConf.REQ_DATA_TYPE, -1, true, 0, instance.getReqRowColor());
-                setCellText(tableRowOne.addNewTableCell(), GetDocxConf.REQ_PARAM_TYPE, -1, true, 1, instance.getReqRowColor());
-                setCellText(tableRowOne.addNewTableCell(), GetDocxConf.REQ_ISFILL, -1, true, 15, instance.getReqRowColor());
-                setCellText(tableRowOne.addNewTableCell(), GetDocxConf.REQ_DESC, -1, true, 38, instance.getReqRowColor());
+    private static void addExample(XWPFDocument doc, String reqexam, String resexam, SetDocxConf instance) {
+        XWPFTable tableRes = doc.createTable();
+        CTTblWidth widthRes = tableRes.getCTTbl().addNewTblPr().addNewTblW();
+        widthRes.setType(STTblWidth.DXA);
+        widthRes.setW(BigInteger.valueOf(10000));
+        // create first row
+        XWPFTableRow tableRowOneRes = tableRes.getRow(0);
+        setCellText(tableRowOneRes.getCell(0), instance.getInterReqExample(), -1, true, 6, instance.getResExampleFirstCellColor());
+        setCellText(tableRowOneRes.addNewTableCell(), reqexam, -1, true, 0, instance.getResExampleOtherCellColor());
+        XWPFTableRow tableRowTwo = tableRes.createRow();
+        setCellText(tableRowTwo.getCell(0), instance.getInterResExample(), -1, true, 0, instance.getResExampleFirstCellColor());
+        setCellText(tableRowTwo.getCell(1), resexam, -1, true, 0, instance.getResExampleOtherCellColor());
+    }
+
+    private static void addResParamTable(XWPFDocument doc, List<Map<String, Object>> res, SetDocxConf instance) {
+        //                XWPFTable table = doc.createTable(50, 5);
+        XWPFTable tableRes = doc.createTable();
+        CTTblWidth widthRes = tableRes.getCTTbl().addNewTblPr().addNewTblW();
+        widthRes.setType(STTblWidth.DXA);
+        widthRes.setW(BigInteger.valueOf(10000));
+        // create first row
+        XWPFTableRow tableRowOneRes = tableRes.getRow(0);
+        setCellText(tableRowOneRes.getCell(0), GetDocxConf.REQ_NAME, -1, true, 6, instance.getResRowColor());
+        setCellText(tableRowOneRes.addNewTableCell(), GetDocxConf.REQ_DATA_TYPE, -1, true, 0, instance.getResRowColor());
+        setCellText(tableRowOneRes.addNewTableCell(), GetDocxConf.REQ_DESC, -1, true, 1, instance.getResRowColor());
+        for (int j = 0; j < res.size(); j++) {
+            //获取map数据
+            Map<String, Object> mapReq = res.get(j);
+            XWPFTableRow tableRowTwo = tableRes.createRow();
+            setCellText(tableRowTwo.getCell(0), mapReq.get(GetDocxConf.REQ_NAME).toString(), -1, true, 0, instance.getResBodyColor());
+            setCellText(tableRowTwo.getCell(1), mapReq.get(GetDocxConf.REQ_DATA_TYPE).toString(), -1, true, 0, instance.getResBodyColor());
+            setCellText(tableRowTwo.getCell(2), mapReq.get(GetDocxConf.REQ_DESC).toString(), -1, true, 0, instance.getResBodyColor());
+//                    tableRowTwo.getCell(0).setText(mapReq.get(GetDocxConf.REQ_NAME).toString());
+//                    tableRowTwo.getCell(1).setText(mapReq.get(GetDocxConf.REQ_DATA_TYPE).toString());
+//                    tableRowTwo.getCell(2).setText(mapReq.get(GetDocxConf.REQ_DESC).toString());
+        }
+    }
+
+    private static void addResPraramTable(XWPFDocument doc, List<Map<String, Object>> req, SetDocxConf instance) {
+        //                XWPFTable table = doc.createTable(50, 5);
+        XWPFTable table = doc.createTable();
+        CTTblWidth width = table.getCTTbl().addNewTblPr().addNewTblW();
+        width.setType(STTblWidth.DXA);
+        width.setW(BigInteger.valueOf(10000));
+        // create first row
+        XWPFTableRow tableRowOne = table.getRow(0);
+
+        setCellText(tableRowOne.getCell(0), GetDocxConf.REQ_NAME, -1, true, 6, instance.getReqRowColor());
+        setCellText(tableRowOne.addNewTableCell(), GetDocxConf.REQ_DATA_TYPE, -1, true, 0, instance.getReqRowColor());
+        setCellText(tableRowOne.addNewTableCell(), GetDocxConf.REQ_PARAM_TYPE, -1, true, 1, instance.getReqRowColor());
+        setCellText(tableRowOne.addNewTableCell(), GetDocxConf.REQ_ISFILL, -1, true, 15, instance.getReqRowColor());
+        setCellText(tableRowOne.addNewTableCell(), GetDocxConf.REQ_DESC, -1, true, 38, instance.getReqRowColor());
 //                tableRowOne.getCell(0).setText();
-                //首次进来需要添加列 ，否则会报null
+        //首次进来需要添加列 ，否则会报null
 //                tableRowOne.addNewTableCell().setText(GetDocxConf.REQ_DATA_TYPE);
 //                tableRowOne.addNewTableCell().setText(GetDocxConf.REQ_PARAM_TYPE);
 //                tableRowOne.addNewTableCell().setText(GetDocxConf.REQ_ISFILL);
 //                tableRowOne.addNewTableCell().setText(GetDocxConf.REQ_DESC);
 
-                for (int j = 0; j < req.size(); j++) {
-                    //获取map数据
-                    Map<String, Object> mapReq = req.get(j);
-                    XWPFTableRow tableRowTwo = table.createRow();
-                    setCellText(tableRowTwo.getCell(0), mapReq.get(GetDocxConf.REQ_NAME).toString(), -1, true, 0, instance.getReqBodyColor());
-                    setCellText(tableRowTwo.getCell(1), mapReq.get(GetDocxConf.REQ_DATA_TYPE).toString(), -1, true, 0, instance.getReqBodyColor());
-                    setCellText(tableRowTwo.getCell(2), mapReq.get(GetDocxConf.REQ_PARAM_TYPE).toString(), -1, true, 0, instance.getReqBodyColor());
-                    setCellText(tableRowTwo.getCell(3), mapReq.get(GetDocxConf.REQ_ISFILL).toString(), -1, true, 0, instance.getReqBodyColor());
-                    setCellText(tableRowTwo.getCell(4), mapReq.get(GetDocxConf.REQ_DESC).toString(), -1, true, 0, instance.getReqBodyColor());
+        for (int j = 0; j < req.size(); j++) {
+            //获取map数据
+            Map<String, Object> mapReq = req.get(j);
+            XWPFTableRow tableRowTwo = table.createRow();
+            setCellText(tableRowTwo.getCell(0), mapReq.get(GetDocxConf.REQ_NAME).toString(), -1, true, 0, instance.getReqBodyColor());
+            setCellText(tableRowTwo.getCell(1), mapReq.get(GetDocxConf.REQ_DATA_TYPE).toString(), -1, true, 0, instance.getReqBodyColor());
+            setCellText(tableRowTwo.getCell(2), mapReq.get(GetDocxConf.REQ_PARAM_TYPE).toString(), -1, true, 0, instance.getReqBodyColor());
+            setCellText(tableRowTwo.getCell(3), mapReq.get(GetDocxConf.REQ_ISFILL).toString(), -1, true, 0, instance.getReqBodyColor());
+            setCellText(tableRowTwo.getCell(4), mapReq.get(GetDocxConf.REQ_DESC).toString(), -1, true, 0, instance.getReqBodyColor());
 //                    tableRowTwo.getCell(1).setText(mapReq.get(GetDocxConf.REQ_DATA_TYPE).toString());
 //                    tableRowTwo.getCell(2).setText(mapReq.get(GetDocxConf.REQ_PARAM_TYPE).toString());
 //                    tableRowTwo.getCell(3).setText(mapReq.get(GetDocxConf.REQ_ISFILL).toString());
 //                    tableRowTwo.getCell(4).setText(mapReq.get(GetDocxConf.REQ_DESC).toString());
-                }
-
-                //响应参数
-                addInterfaceResponse(doc, pres);
-                //创建表格
-//                XWPFTable table = doc.createTable(50, 5);
-                XWPFTable tableRes = doc.createTable();
-                CTTblWidth widthRes = tableRes.getCTTbl().addNewTblPr().addNewTblW();
-                widthRes.setType(STTblWidth.DXA);
-                widthRes.setW(BigInteger.valueOf(10000));
-                // create first row
-                XWPFTableRow tableRowOneRes = tableRes.getRow(0);
-
-                setCellText(tableRowOneRes.getCell(0), GetDocxConf.REQ_NAME, -1, true, 6, instance.getResRowColor());
-                setCellText(tableRowOneRes.addNewTableCell(), GetDocxConf.REQ_DATA_TYPE, -1, true, 0, instance.getResRowColor());
-                setCellText(tableRowOneRes.addNewTableCell(), GetDocxConf.REQ_DESC, -1, true, 1, instance.getResRowColor());
-
-                for (int j = 0; j < res.size(); j++) {
-                    //获取map数据
-                    Map<String, Object> mapReq = res.get(j);
-                    XWPFTableRow tableRowTwo = tableRes.createRow();
-                    setCellText(tableRowTwo.getCell(0), mapReq.get(GetDocxConf.REQ_NAME).toString(), -1, true, 0, instance.getResBodyColor());
-                    setCellText(tableRowTwo.getCell(1), mapReq.get(GetDocxConf.REQ_DATA_TYPE).toString(), -1, true, 0, instance.getResBodyColor());
-                    setCellText(tableRowTwo.getCell(2), mapReq.get(GetDocxConf.REQ_DESC).toString(), -1, true, 0, instance.getResBodyColor());
-//                    tableRowTwo.getCell(0).setText(mapReq.get(GetDocxConf.REQ_NAME).toString());
-//                    tableRowTwo.getCell(1).setText(mapReq.get(GetDocxConf.REQ_DATA_TYPE).toString());
-//                    tableRowTwo.getCell(2).setText(mapReq.get(GetDocxConf.REQ_DESC).toString());
-                }
-            }
         }
     }
 
@@ -237,15 +273,16 @@ public class DocxUtils {
 
 
     private static void addInterfaceContent(XWPFDocument doc, String pdesc, String purl, String pmethod, String ptype, String preq) {
+        int textSize = SetDocxConf.getInstance().getTextFontSize();
         //新建段落
         XWPFParagraph p = doc.createParagraph();
         //布局靠左
         p.setAlignment(ParagraphAlignment.LEFT);
-        XWPFRun r2 = addInsertNewRun(p, 12, false, pdesc, true, false);
-        XWPFRun r3 = addInsertNewRun(p, 12, false, purl, true, false);
-        XWPFRun r4 = addInsertNewRun(p, 12, false, pmethod, true, false);
-        XWPFRun r6 = addInsertNewRun(p, 12, false, ptype, true, false);
-        XWPFRun r5 = addInsertNewRun(p, 12, false, preq, false, false);
+        XWPFRun r2 = addInsertNewRun(p, textSize, false, pdesc, true, false);
+        XWPFRun r3 = addInsertNewRun(p, textSize, false, purl, true, false);
+        XWPFRun r4 = addInsertNewRun(p, textSize, false, pmethod, true, false);
+        XWPFRun r6 = addInsertNewRun(p, textSize, false, ptype, true, false);
+        XWPFRun r5 = addInsertNewRun(p, textSize, false, preq, false, false);
     }
 
     private static void addInterfaceResponse(XWPFDocument doc, String pres) {
@@ -253,13 +290,13 @@ public class DocxUtils {
         XWPFParagraph p = doc.createParagraph();
         //布局靠左
         p.setAlignment(ParagraphAlignment.LEFT);
-        XWPFRun r5 = addInsertNewRun(p, 12, false, pres, false, false);
+        XWPFRun r5 = addInsertNewRun(p, SetDocxConf.getInstance().getTextFontSize(), false, pres, false, false);
     }
 
     private static void addSecondTitle(XWPFDocument doc, String title) {
         XWPFParagraph p2 = doc.createParagraph();
         p2.setStyle("heading2");
-        XWPFRun r1 = addInsertNewRun(p2, 18, true, title, true, false);
+        XWPFRun r1 = addInsertNewRun(p2, SetDocxConf.getInstance().getTextSecondTitleFontSize(), true, title, true, false);
     }
 
     private static void addFirstTitle(XWPFDocument doc, int num, Map.Entry<String, List<Map<String, Object>>> entry) {
@@ -313,10 +350,10 @@ public class DocxUtils {
     private static void addStyle(XWPFDocument document) {
         SetDocxConf instance = SetDocxConf.getInstance();
         //添加预置样式
-        addCustomHeadingStyle(document, "heading1", 1, 22, instance.getTextTitleColor(), instance.getTextTitleFont());
-        addCustomHeadingStyle(document, "heading2", 2, 18, instance.getTextTitleColor(), instance.getTextTitleFont());
-        addCustomHeadingStyle(document, "heading3", 3, 14, instance.getTextTitleColor(), instance.getTextTitleFont());
-        addCustomHeadingStyle(document, "heading4", 4, 10, instance.getTextTitleColor(), instance.getTextTitleFont());
+        addCustomHeadingStyle(document, "heading1", 1, instance.getTextFirstTitleFontSize(), instance.getTextTitleColor(), instance.getTextTitleFont());
+        addCustomHeadingStyle(document, "heading2", 2, instance.getTextSecondTitleFontSize(), instance.getTextTitleColor(), instance.getTextTitleFont());
+        addCustomHeadingStyle(document, "heading3", 3, instance.getTextThreeTitleFontSize(), instance.getTextTitleColor(), instance.getTextTitleFont());
+        addCustomHeadingStyle(document, "heading4", 4, instance.getTextFourTitleFontSize(), instance.getTextTitleColor(), instance.getTextTitleFont());
     }
 
     /**

@@ -29,6 +29,8 @@ public interface GetDocxConf {
     String INTERFACE_URL = "url";
     String INTERFACE_METHOD = "method";
     String INTERFACE_REQ = "req";
+    String INTERFACE_REQ_EXAMPLE = "req_example";
+    String INTERFACE_RES_EXAMPLE = "res_example";
     String INTERFACE_RES = "res";
     String INTERFACE_TYPE = "type";
 
