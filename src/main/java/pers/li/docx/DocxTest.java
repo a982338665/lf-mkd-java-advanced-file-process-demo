@@ -100,4 +100,66 @@ public class DocxTest {
     }
 
 
+    public void  ptherCOntent(){
+        XWPFDocument document = new XWPFDocument();
+        XWPFTable xtab2 = document.createTable(1, 2);
+//        1.表格或单元格宽度：
+//        默认TblW的type属性为STTblWidth.AUTO,即自动伸缩。所以要调整为指定类型：STTblWidth.DXA 1）表格宽：
+        CTTblPr tblPr = xtab2.getCTTbl().getTblPr();
+        tblPr.getTblW().setType(STTblWidth.DXA);
+        tblPr.getTblW().setW(new BigInteger("7000"));
+
+//        2.单元格宽：
+//        CTTcPr tcpr = cell.getCTTc().addNewTcPr();
+//        CTTblWidth cellw = tcpr.addNewTcW();
+//        cellw.setType(STTblWidth.DXA);
+//        cellw.setW(BigInteger.valueOf(360*5));
+
+//        2.表格风格
+//        注：如果不设置风格，将采用默认的Normal风格
+//        CTTblPr tblPr = xtab2.getCTTbl().getTblPr();
+//        CTString styleStr = tblPr.addNewTblStyle();
+//        styleStr.setVal("StyledTable");
+
+//        2.表格行高：获取表格行的CTTrPr.增加CTHeight属性
+//        List rows = xtab2.getRows();
+//        for (XWPFTableRow row : rows) {
+//            CTTrPr trPr = row.getCtRow().addNewTrPr();
+//            CTHeight ht = trPr.addNewTrHeight();
+//            ht.setVal(BigInteger.valueOf(360));
+//        }
+
+//        3.表格行内容垂直居中：
+//        CTVerticalJc va = tcpr.addNewVAlign();
+//        va.setVal(STVerticalJc.CENTER);
+//        3.表格单元格颜色
+//                例如下面的标题行与奇偶行颜色设置
+//        CTShd ctshd = tcpr.addNewShd();
+//        ctshd.setColor("auto");
+//        ctshd.setVal(STShd.CLEAR);
+//        if (rowCt == 0) {
+//              标题行
+//            ctshd.setFill("A7BFDE");
+//        }else if (rowCt % 2 == 0) {
+        // even row
+//            ctshd.setFill("D3DFEE");
+//
+//        }else {
+    // odd row
+//            ctshd.setFill("EDF2F8");
+//        }
+
+//5.获取某指定位置对象并生成新的光标位置
+//    注:这个更新或插入操作比较有用,比如更新文档目录.
+//            XmlCursor cursor = doc.getDocument().getBody().getPArray(0).newCursor();
+//    XWPFParagraph cP = doc.insertNewParagraph(cursor);
+//6.插入图片：
+//    XWPFParagraph parapictest = document.createParagraph();
+//    XWPFRun runtest = parapictest.createRun();
+//    runtest.setText("图片:");
+//    XWPFRun pictest = document.createParagraph().createRun();
+//    XWPFPicture picture = pictest.addPicture(new FileInputStream("D://563.jpg"), Document.PICTURE_T YPE_JPEG, "D://563.jpg", 1000*360*10,1000*360*10);
+    }
+
+
 }
