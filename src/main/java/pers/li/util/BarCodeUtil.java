@@ -14,22 +14,22 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * ÌõĞÎÂëÉú³É¹¤¾ßÀà
+ * æ¡å½¢ç ç”Ÿæˆå·¥å…·ç±»
  */
 public class BarCodeUtil {
 
     /**
-     * generateCode ¸ù¾İcodeÉú³ÉÏàÓ¦µÄÒ»Î¬Âë
+     * generateCode æ ¹æ®codeç”Ÿæˆç›¸åº”çš„ä¸€ç»´ç 
      *
-     * @param code   Ò»Î¬ÂëÄÚÈİ
-     * @param width  Í¼Æ¬¿í¶È
-     * @param height Í¼Æ¬¸ß¶È
+     * @param code   ä¸€ç»´ç å†…å®¹
+     * @param width  å›¾ç‰‡å®½åº¦
+     * @param height å›¾ç‰‡é«˜åº¦
      */
     public static BufferedImage generateCode(String code, int width, int height) {
-        //¶¨ÒåÎ»Í¼¾ØÕóBitMatrix
+        //å®šä¹‰ä½å›¾çŸ©é˜µBitMatrix
         BitMatrix matrix = null;
         try {
-            // Ê¹ÓÃcode_128¸ñÊ½½øĞĞ±àÂëÉú³É100*25µÄÌõĞÎÂë
+            // ä½¿ç”¨code_128æ ¼å¼è¿›è¡Œç¼–ç ç”Ÿæˆ100*25çš„æ¡å½¢ç 
             MultiFormatWriter writer = new MultiFormatWriter();
 
             matrix = writer.encode(code, BarcodeFormat.CODE_128, width, height, null);
@@ -43,9 +43,9 @@ public class BarCodeUtil {
     }
 
     /**
-     * readCode ¶ÁÈ¡Ò»ÕÅÒ»Î¬ÂëÍ¼Æ¬
+     * readCode è¯»å–ä¸€å¼ ä¸€ç»´ç å›¾ç‰‡
      *
-     * @param file Ò»Î¬ÂëÍ¼Æ¬Ãû×Ö
+     * @param file ä¸€ç»´ç å›¾ç‰‡åå­—
      */
     public static String readCode(File file) {
         try {
@@ -62,7 +62,7 @@ public class BarCodeUtil {
             hints.put(DecodeHintType.TRY_HARDER, Boolean.TRUE);
 
             Result result = new MultiFormatReader().decode(bitmap, hints);
-            System.out.println("ÌõĞÎÂëÄÚÈİ: " + result.getText());
+            System.out.println("æ¡å½¢ç å†…å®¹: " + result.getText());
             return result.getText();
         } catch (Exception e) {
             e.printStackTrace();
@@ -72,17 +72,17 @@ public class BarCodeUtil {
 
     public static void main(String[] args) throws Exception {
         BufferedImage bufferedImage = generateCode("123456789012", 500, 250);
-        //½«Î»Í¼¾ØÕóBitMatrix±£´æÎªÍ¼Æ¬
+        //å°†ä½å›¾çŸ©é˜µBitMatrixä¿å­˜ä¸ºå›¾ç‰‡
         try (FileOutputStream outStream = new FileOutputStream(new File("1dcode.png"))) {
-            //Ò»Î¬Âë±£´æÎªÎÄ¼ş
+            //ä¸€ç»´ç ä¿å­˜ä¸ºæ–‡ä»¶
             ImageIO.write(bufferedImage, "png", outStream);
-            //Í¨¹ıÍøÂçĞ´µ½ä¯ÀÀÆ÷
+            //é€šè¿‡ç½‘ç»œå†™åˆ°æµè§ˆå™¨
             //ImageIO.write(buffImg, "jpg", response.getOutputStream());
             outStream.flush();
         } catch (Exception e) {
             e.printStackTrace();
         }
-        //Ò»Î¬ÂëÄÚÈİ½âÎö
+        //ä¸€ç»´ç å†…å®¹è§£æ
         String s = readCode(new File("1dcode.png"));
 
     }

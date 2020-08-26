@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 
+import com.sun.javaws.HtmlOptions;
 import org.apache.poi.xwpf.usermodel.XWPFDocument;
 
 import com.lowagie.text.Font;
@@ -22,9 +23,9 @@ import fr.opensagres.xdocreport.itext.extension.font.ITextFontRegistry;
 public class XDocReportTest {
 
 	public static void main(String[] args) throws Exception {
-		XWPFDocument doc = new XWPFDocument(new FileInputStream("template.docx"));// docx
+		XWPFDocument doc = new XWPFDocument(new FileInputStream("InterfaceFile.docx"));// docx
 		PdfOptions options = PdfOptions.create();
-		options.fontProvider(new IFontProvider() {
+		/*options.fontProvider(new IFontProvider() {
 			// 设置中文字体
 			public Font getFont(String familyName, String encoding, float size, int style, Color color) {
 				try {
@@ -40,7 +41,7 @@ public class XDocReportTest {
 					return ITextFontRegistry.getRegistry().getFont(familyName, encoding, size, style, color);
 				}
 			}
-		});
-		PdfConverter.getInstance().convert(doc, new FileOutputStream("template.pdf"), options);// pdf
+		});*/
+		PdfConverter.getInstance().convert(doc, new FileOutputStream("InterfaceFile.pdf"), options);// pdf
 	}
 }
