@@ -149,6 +149,13 @@
         </dependency>
         <!--  web范围内的文件处理======================================================================================  -->
 
+        <!--  添加excel依赖包++++++++++++++++++++++++++++++++      -->
+        <dependency>
+            <groupId>com.github.a982338665</groupId>
+            <artifactId>lf-execl-easy</artifactId>
+            <version>1.0.1-RELEASE</version>
+        </dependency>
+
         <!--img-->
         <dependency>
             <groupId>org.jfree</groupId>

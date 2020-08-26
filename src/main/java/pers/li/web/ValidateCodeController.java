@@ -21,11 +21,12 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/test")
 @Slf4j
-public class TestController1 {
+public class ValidateCodeController {
 
 
     /**
      * 验证码生成
+     *  http://localhost:8080/test/generate
      *
      * @throws IOException
      */
