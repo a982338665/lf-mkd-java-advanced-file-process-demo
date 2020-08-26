@@ -7,6 +7,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.util.Random;
 
 
@@ -26,6 +27,19 @@ public class ValidateCodeUtil {
         //ImageIO.write(buffImg, "jpg", response.getOutputStream());
     }
 
+    /**
+     * 验证码生成并返回
+     * @param height
+     * @param width
+     * @param type
+     * @param codeCount
+     * @param outputStream
+     * @throws IOException
+     */
+    public static void generateAndResponse(int height, int width, int type, int codeCount, OutputStream outputStream) throws IOException {
+        BufferedImage buffImg = generateCode(height, width, type,codeCount);
+        ImageIO.write(buffImg, "jpg", outputStream);
+    }
 
     /**
      * 验证码生成
