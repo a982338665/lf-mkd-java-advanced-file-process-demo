@@ -22,6 +22,13 @@ import java.util.UUID;
  * @author:luofeng
  * @createTime : 2018/10/9 16:02
  * 测试xml格式内容
+ *
+ * <xml>
+ *   <order_id><![CDATA[201807031109358406949]]></order_id>
+ *   <sign><![CDATA[f296ce56231147869aa413f1edef6403]]></sign>
+ *   <data><![CDATA[{"application_status":"review"}]]></data>
+ *   <uuid><![CDATA[123654978945]]></uuid>
+ * </xml>
  */
 @RestController
 @RequestMapping("/testxmlvo")
