@@ -18,6 +18,16 @@ public class TestUser {
     @LFColume("时间")
     private Date time;
 
+    private long idcard;
+
+    public long getIdcard() {
+        return idcard;
+    }
+
+    public void setIdcard(long idcard) {
+        this.idcard = idcard;
+    }
+
     public String getId() {
         return id;
     }

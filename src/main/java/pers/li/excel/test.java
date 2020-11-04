@@ -49,7 +49,7 @@ public class test {
         //导出全部
         ExportDataBase all1 = new ExportDataALL("sheet1", testUsers, TestUser.class);
         ExportDataBase all2 = new ExportDataALL("sheet2", testUsers, TestUser.class);
-        ExportDataBase all3 = new ExportDataPart("sheet3", new String[]{"id", "部门名称"}, new String[]{"id", "deptName"}, testDept);
+        ExportDataBase all3 = new ExportDataPart("sheet3", new String[]{"主键id", "部门名称","年龄"}, new String[]{"id", "deptName","age"}, testDept);
 
         all1.setExcelRuleInfo(new ExcelRuleInfo("hhh"));
 
