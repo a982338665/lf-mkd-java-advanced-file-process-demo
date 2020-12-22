@@ -124,7 +124,7 @@
             -一行记录 CSVRecord
             -写入文档 CSVPrinter
 
-**4.pdf文件：**    
+**5.pdf文件：**    
     
     1，介绍：
         1.Portable Document Format的简称，意思为 便携式文档格式
@@ -154,12 +154,12 @@
         3.基于poi和iText完成
 
 
-**1.excel导出方式比较对比：**
+**6.excel导出方式比较对比：**
     
     xml导出方式最快 - 优选
     poi次之
-    
- **3.excel读取写入：**
+
+**7.excel读取写入：**
  
     <!-- 引入poi，解析workbook视图 -->
     <dependency>
@@ -179,4 +179,77 @@
         <version>2.6.10</version>
     </dependency>
     
+**8.pers.li.io**
+
+    四个基础节点流：
+    基础节点流均为抽象类，不能被实例化
+        ·InputStream : 输入字节流, 也就是说它既属于输入流, 也属于字节流
+        ·OutputStream: 输出字节流, 既属于输出流, 也属于字节流
+        ·Reader: 输入字符流, 既属于输入流, 又属于字符流
+        ·Writer: 输出字符流, 既属于输出流, 又属于字符流
+
+    处理流：高级流，让程序员只关心这个该如何，让节点流与底层io设备文件交互
+        deal
+        1.对开发，使用处理流更简单
+        2.执行效率更高
+    —————————————————
+              字节输入流        字节输出流         字符输入流      字符输出流
+    抽象基类  InputStream       OutputStream        Reader          Writer
+    访问文件  FileInputStream   FileOutputStream    FileReader      FileWriter
+    数组      ByteArray--       ByteArray--         CharArray--     CharArray--
+    管道      Piped--           Piped--             Piped--         Piped--
+    字符串       -                -                 String--        String--
+    缓冲流    Buffered--        Buffered--          Buffered--      Buffered--
+    转换流       -                -                 InputStreamReader OutputStreamWriter
+    对象流    Object--          Object--               -               -
+    抽象基类  FilterInputStream Filter--             Filter--        Filter--
+    打印流       -              PrintStream            -             PrintWriter
+    推回输入流PushbackInputStream  -                 PushbackReader    -
+    特殊流   DataInputStream    DataOutputStream       -               -
     
+    ·对象流主要用来实现序列化
+    ·管道流主要实现进程之间的通信功能
+    ·缓冲流增加缓冲功能，提高输入输出效率
+    ·增加缓冲功能后，要是用flush才可将缓冲区的内容写入实际的物理节点
+    此上均为io包下的流：别的在JDK其他包下，暂不介绍
+    ---------------------------------------------------------------------------
+    字节流功能>字符流：
+    1.计算机数据为二进制（字节流可以处理所有二进制文件）：
+        ·文本文件难处理：可使用字符流
+        ·二进制内容：字节流
+    ——————————————————————————————————————
+       /**
+         * 节点流和处理流：
+         * 节点流：直接和输入输出的数据节点进行连接，低级流
+         * 处理流也是包装流，程序进行输入输出时不会接入数据节点，会通过处理流来访问不同的数据源
+         * 通过使用处理流，java程序就不用理会输入输出节点是磁盘，网络还是其他，只要将这些节点流
+         * 包装成处理流，就可以使用相同的输入输出代码来读写不同的输入输出设备数据
+         * 处理流的好处：
+         *  1.性能的提高：增加缓冲方式提高输入输出效率
+         *  2.操作的便捷：处理流可能提供了一系列便捷的方法来一次输入或输出大批量内容
+         * 流的水滴模型概念：
+         *  1.input/reader  --读入 字节、字符流
+         *  2.output/writer --写出 字节、字符流
+    ——————————————————————————————————————  */
+    断点续传：多线程的网络下载工具
+        ·new RandomAccessFile("path","rw")
+             raf.seek(300);
+             raf.write("追加内容".getBytes());
+    文件或目录搜索：
+        ·Files.walkFileTree(Paths.get("D:\\git-266178"),new SimpleFileVisitor<Path>(){@Override两个遍历方法}
+    高效监听文件变化：
+        ·WatchService service=FileSystems.getDefault().newWatchService();
+        ·Paths.get("C:/").register(...)
+        ·while(true){WatchKey key=service.take();
+                    for (WatchEvent<?> event:key.pollEvents()
+                          ) {
+                         System.out.println(event.context()+"文件发生了 "+event.kind()+" 事件");
+                     }
+                         //重设watchKey
+                     boolean b=key.reset();
+                     //如果重设失败退出监听
+                     if(!b){
+                         break;
+                     }
+                 }
+    文件属性访问：详见D:\BaiduNetdiskDownload\1803短信\untitled\src\pers\li\io\nio\AttributeViewTest.java
