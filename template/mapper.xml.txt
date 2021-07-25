@@ -1,0 +1,40 @@
+#setFileName[$!{camelCaseTableName}Mapper.xml] #!定义java文件名称!#
+#setFilePath[!##{basePath}##src\main\java\com\github\test\mapper]
+
+#XML  #!表示是否是XML格式内容!#
+
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.github.test.web.dao.$!{camelCaseTableName}Dao">
+
+    <resultMap id="BaseResultMap" type="com.github.test.entity.$!{camelCaseTableName}Model">
+        <!--@Table $!{tableName}-->
+        #foreach_start($column in $tableInfo.fieldInfos)
+            <result property="$[column.camelCaseFieldName]" column="$[column.fieldName]" jdbcType="$[column.fieldTypeNoNum]"/>
+        #foreach_end
+    </resultMap>
+
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="BaseResultMap">
+        select
+        $!{allSqlColumn}
+        from $!{tableName}
+        where $!{primaryKeyInfo.fieldName} = #{$!{primaryKeyInfo.camelCaseFieldName}}
+    </select>
+
+     <!--if - end else查询-->
+     <select id="queryById2" resultMap="BaseResultMap">
+         select
+         $!{allSqlColumn}
+         from $!{tableName}
+         <where>
+         #foreach_start($column in $tableInfo.fieldInfos)
+            <if test="$[column.camelCaseFieldName] != null #if($[column.classTypeShort|equalsString]) and $[column.camelCaseFieldName] != ''#end">
+                and $[column.fieldName] = #{$[column.camelCaseFieldName]}
+            </if>
+         #foreach_end
+         </where>
+
+     </select>
+</mapper>

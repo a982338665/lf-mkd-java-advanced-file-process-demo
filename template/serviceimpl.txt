@@ -1,0 +1,82 @@
+#setFileName[$!{camelCaseTableName}ServiceImpl.java] #!定义java文件名称!#
+#setFilePath[!##{basePath}##src\main\java\com\github\test\service\impl]
+
+package #defaultPackage;
+
+import com.github.test.entity.$!{camelCaseTableName}Model;
+import com.github.test.web.dao.$!{camelCaseTableName}Dao;
+import com.github.test.service.$!{camelCaseTableName}Service;
+import org.springframework.stereotype.Service;
+
+import javax.annotation.Resource;
+import java.util.List;
+
+/**
+ * @author : !##{author}##
+ * @URL : !##{url}##
+ * @CreateTime : !##{nowDate}##
+ * @Description : 生成模板映射类- 存储模板对应关系
+ * @TableName ：$!{tableName} !{tableNote}
+ */
+@Service("$!{camelCaseTableName|lower}Service")
+public class $!{camelCaseTableName}ServiceImpl implements $!{camelCaseTableName}Service {
+    @Resource
+    private $!{camelCaseTableName}Dao $!{camelCaseTableName|lower}Dao;
+
+    /**
+     * 通过ID查询单条数据
+     *
+     * @param $!{primaryKeyInfo.fieldName}  主键
+     * @return $!{camelCaseTableName|lower}Model实例对象
+     */
+    @Override
+    public $!{camelCaseTableName}Model queryById($!{primaryKeyInfo.classTypeShort} $!{primaryKeyInfo.fieldName}) {
+        return this.$!{camelCaseTableName|lower}Dao.queryById($!{primaryKeyInfo.fieldName});
+    }
+
+    /**
+     * 查询多条数据
+     *
+     * @param offset 查询起始位置
+     * @param limit 查询条数
+     * @return 对象列表
+     */
+    @Override
+    public List<$!{camelCaseTableName}Model> queryAllByLimit(int offset, int limit) {
+        return this.$!{camelCaseTableName|lower}Dao.queryAllByLimit(offset, limit);
+    }
+
+    /**
+     * 新增数据
+     *
+     * @param $!{camelCaseTableName|lower} 实例对象
+     * @return 实例对象
+     */
+    @Override
+    public int insert($!{camelCaseTableName}Model $!{camelCaseTableName|lower}) {
+        return this.$!{camelCaseTableName|lower}Dao.insert($!{camelCaseTableName|lower});
+    }
+
+    /**
+     * 修改数据
+     *
+     * @param $!{camelCaseTableName|lower}) 实例对象
+     * @return 实例对象
+     */
+    @Override
+    public int update($!{camelCaseTableName}Model $!{camelCaseTableName|lower}) {
+        return this.$!{camelCaseTableName|lower}Dao.update($!{camelCaseTableName|lower});
+        #!return this.queryById($!{camelCaseTableName|lower}.get$!{primaryKeyInfo.fieldName|upper}());!#
+    }
+
+    /**
+     * 通过主键删除数据
+     *
+     * @param $!{primaryKeyInfo.fieldName} 主键
+     * @return 是否成功
+     */
+    @Override
+    public int deleteById($!{primaryKeyInfo.classTypeShort} $!{primaryKeyInfo.fieldName}) {
+        return this.$!{camelCaseTableName|lower}Dao.deleteById($!{primaryKeyInfo.fieldName});
+    }
+}

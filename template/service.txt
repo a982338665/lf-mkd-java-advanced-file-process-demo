@@ -1,0 +1,61 @@
+#setFileName[$!{camelCaseTableName}Service.java] #!定义java文件名称!#
+#setFilePath[!##{basePath}##src\main\java\com\github\test\service]
+
+package #defaultPackage;
+
+import com.github.test.entity.$!{camelCaseTableName}Model;
+import org.apache.ibatis.annotations.Param;
+import java.util.List;
+
+/**
+ * @author : !##{author}##
+ * @URL : !##{url}##
+ * @CreateTime : !##{nowDate}##
+ * @Description : 生成模板映射类- 存储模板对应关系
+ * @TableName ：$!{tableName} !{tableNote}
+ */
+public interface $!{camelCaseTableName}Service {
+
+    /**
+     * 通过ID查询单条数据
+     *
+     * @param $!{primaryKeyInfo.fieldName}  主键
+     * @return $!{camelCaseTableName|lower}Model实例对象
+     */
+    $!{camelCaseTableName}Model queryById($!{primaryKeyInfo.classTypeShort} $!{primaryKeyInfo.fieldName});
+
+    /**
+     * 查询指定行数据
+     *
+     * @param offset 查询起始位置
+     * @param limit 查询条数
+     * @return 对象列表
+     */
+    List<$!{camelCaseTableName}Model> queryAllByLimit(@Param("offset") int offset, @Param("limit") int limit);
+
+
+    /**
+     * 新增数据
+     *
+     * @param $!{camelCaseTableName|lower}Model) 实例对象
+     * @return 影响行数
+     */
+    int insert($!{camelCaseTableName}Model $!{camelCaseTableName|lower}Model);
+
+    /**
+     * 修改数据
+     *
+     * @param $!{camelCaseTableName|lower}Model 实例对象
+     * @return 影响行数
+     */
+    int update($!{camelCaseTableName}Model $!{camelCaseTableName|lower}Model);
+
+    /**
+     * 通过主键删除数据
+     *
+     * @param $!{primaryKeyInfo.fieldName} 主键
+     * @return 影响行数
+     */
+    int deleteById($!{primaryKeyInfo.classTypeShort} $!{primaryKeyInfo.fieldName});
+
+}

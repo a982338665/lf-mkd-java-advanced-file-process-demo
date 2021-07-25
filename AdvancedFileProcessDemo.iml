@@ -91,7 +91,7 @@
     <orderEntry type="module-library">
       <library name="Maven: com.alibaba:jconsole:1.8.0">
         <CLASSES>
-          <root url="jar://D:/install-soft/java8/lib/jconsole.jar!/" />
+          <root url="jar://D:/install-soft/java/lib/jconsole.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
@@ -100,7 +100,7 @@
     <orderEntry type="module-library">
       <library name="Maven: com.alibaba:tools:1.8.0">
         <CLASSES>
-          <root url="jar://D:/install-soft/java8/lib/tools.jar!/" />
+          <root url="jar://D:/install-soft/java/lib/tools.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
@@ -113,6 +113,7 @@
     <orderEntry type="library" name="Maven: org.apache.httpcomponents:httpclient:4.5.1" level="project" />
     <orderEntry type="library" name="Maven: org.apache.httpcomponents:httpcore:4.4.3" level="project" />
     <orderEntry type="library" name="Maven: com.github.a982338665:lf-execl-easy:1.0.1-RELEASE" level="project" />
+    <orderEntry type="library" name="Maven: com.github.a982338665:lf-open-java-generate-code:1.0.1-RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.jfree:jfreechart:1.0.19" level="project" />
     <orderEntry type="library" name="Maven: org.jfree:jcommon:1.0.23" level="project" />
     <orderEntry type="library" name="Maven: com.google.zxing:core:3.3.3" level="project" />

@@ -1,0 +1,35 @@
+#setFileName[$!{camelCaseTableName}Model.java] #!定义java文件名称!#
+#setFilePath[!##{basePath}##src\main\java\com\github\test\entity]
+#autoImport #!自动导包，指的是数据库对应的实体类的包.同时生成可用于Vo，dto，query等!#
+
+package #defaultPackage;
+/**
+ * @author : !##{author}##
+ * @URL : !##{url}##
+ * @CreateTime : !##{nowDate}##
+ * @Description : 生成模板映射类- 存储模板对应关系
+ * @TableName ：$!{tableName} $!{tableNote}
+ * $!{tableName|upper}
+ */
+public class $!{camelCaseTableName}Model {
+
+    #foreach_start($XXXX in $tableInfo.fieldInfos)
+    /**
+     * $[XXXX.fieldNote]
+     */
+#if($[XXXX.classTypeShort|judgeDateTime])   @JsonFormat(pattern = "yyyy-MM-dd")#end
+#if($[XXXX.primaryKey|judgeTrue])   @TableId(value = "$[XXXX.fieldName]", type = IdType.AUTO)#end
+    private $[XXXX.classTypeShort] $[XXXX.camelCaseFieldName];
+    #foreach_end
+    #foreach_start($XXXX in $tableInfo.fieldInfos)
+    public $[XXXX.classTypeShort] get$[XXXX.camelCaseFieldName|upper]() {
+        return $[XXXX.camelCaseFieldName];
+    }
+
+    public void set$[XXXX.camelCaseFieldName|upper|upperAll]($[XXXX.classTypeShort] $[XXXX.camelCaseFieldName]) {
+        this.$[XXXX.camelCaseFieldName] = $[XXXX.camelCaseFieldName];
+    }
+    #foreach_end
+}
+
+

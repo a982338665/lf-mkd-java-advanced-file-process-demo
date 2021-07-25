@@ -155,6 +155,11 @@
             <artifactId>lf-execl-easy</artifactId>
             <version>1.0.1-RELEASE</version>
         </dependency>
+        <dependency>
+            <groupId>com.github.a982338665</groupId>
+            <artifactId>lf-open-java-generate-code</artifactId>
+            <version>1.0.1-RELEASE</version>
+        </dependency>
 <!--        <dependency>-->
 <!--            <groupId>com.github.a982338665</groupId>-->
 <!--            <artifactId>lf-execl-easy</artifactId>-->

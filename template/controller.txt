@@ -1,0 +1,81 @@
+#setFileName[$!{camelCaseTableName}Controller.java] #!定义java文件名称!#
+#setFilePath[!##{basePath}##src\main\java\com\github\test\controller]
+package #defaultPackage;
+
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+import com.github.test.entity.$!{camelCaseTableName}Model;
+import com.github.test.web.dao.$!{camelCaseTableName}Dao;
+import com.github.test.service.$!{camelCaseTableName}Service;
+import com.github.test.service.impl.$!{camelCaseTableName}ServiceImpl;
+import org.springframework.stereotype.Service;
+
+import javax.annotation.Resource;
+import java.util.List;
+
+/**
+ * @author : !##{author}##
+ * @URL : !##{url}##
+ * @CreateTime : !##{nowDate}##
+ * @Description : 生成模板映射类- 存储模板对应关系
+ * @TableName ：$!{tableName} $!{tableNote}
+ */
+@RestController
+@RequestMapping("$!{camelCaseTableName|lower}")
+public class $!{camelCaseTableName}Controller {
+
+    @Resource
+    private $!{camelCaseTableName}Service $!{camelCaseTableName|lower}Service;
+
+    /**
+     * 通过ID查询单条数据
+     *
+     * @param $!{primaryKeyInfo.fieldName}  主键
+     * @return $!{camelCaseTableName|lower}Model实例对象
+     */
+    public $!{camelCaseTableName}Model queryById($!{primaryKeyInfo.classTypeShort} $!{primaryKeyInfo.fieldName}) {
+        return this.$!{camelCaseTableName|lower}Service.queryById($!{primaryKeyInfo.fieldName});
+    }
+
+    /**
+     * 查询多条数据
+     *
+     * @param offset 查询起始位置
+     * @param limit 查询条数
+     * @return 对象列表
+     */
+    public List<$!{camelCaseTableName}Model> queryAllByLimit(int offset, int limit) {
+        return this.$!{camelCaseTableName|lower}Service.queryAllByLimit(offset, limit);
+    }
+
+    /**
+     * 新增数据
+     *
+     * @param $!{camelCaseTableName|lower} 实例对象
+     * @return 实例对象
+     */
+    public int insert($!{camelCaseTableName}Model $!{camelCaseTableName|lower}) {
+        return this.$!{camelCaseTableName|lower}Service.insert($!{camelCaseTableName|lower});
+    }
+
+    /**
+     * 修改数据
+     *
+     * @param $!{camelCaseTableName|lower}) 实例对象
+     * @return 实例对象
+     */
+    public int update($!{camelCaseTableName}Model $!{camelCaseTableName|lower}) {
+        return this.$!{camelCaseTableName|lower}Service.update($!{camelCaseTableName|lower});
+        #!return this.queryById($!{camelCaseTableName|lower}.get$!{primaryKeyInfo.fieldName|upper}());!#
+    }
+
+    /**
+     * 通过主键删除数据
+     *
+     * @param $!{primaryKeyInfo.fieldName} 主键
+     * @return 是否成功
+     */
+    public int deleteById($!{primaryKeyInfo.classTypeShort} $!{primaryKeyInfo.fieldName}) {
+        return this.$!{camelCaseTableName|lower}Service.deleteById($!{primaryKeyInfo.fieldName});
+    }
+}
