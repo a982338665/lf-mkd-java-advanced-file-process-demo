@@ -47,7 +47,7 @@ public class ExcelExportController {
         response.setHeader("content-Type", "application/vnd.ms-excel");
         // 下载文件的默认名称
         response.setHeader("Content-Disposition", "attachment;filename=" + URLEncoder.encode("name" + ".xls", "utf-8"));
-        exportExcelUtils.outPutResponse(response.getOutputStream(), s);
+        ExportExcelUtils.outPutResponse(response.getOutputStream(), s);
     }
 
     private String getExcelInfo(ExportExcelUtils exportExcelUtils) {
