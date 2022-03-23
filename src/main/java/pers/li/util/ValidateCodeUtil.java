@@ -14,7 +14,9 @@ import java.util.Random;
 /**
  * 验证码生成工具类
  * 可以通过：response.getOutputStream()响应到浏览器
+··· * @author luofeng
  */
+@SuppressWarnings("AlibabaAvoidCommentBehindStatement")
 public class ValidateCodeUtil {
 
     public static Random random = new Random();
@@ -53,10 +55,11 @@ public class ValidateCodeUtil {
     public static BufferedImage generateCode(int height, int width, int type,int codeCount) throws IOException {
         // 首先定义验证码图片框
         if (width == 0) {
-            width = 80; // 验证码图片的宽度
+            // 验证码图片的宽度
+            width = 80;
         }
         if (height == 0) {
-            height = 32; // 验证码图片的高度
+            height = 32; /* 验证码图片的高度 */
         }
         BufferedImage buffImg = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
         //定义图片上的图形和干扰线
@@ -106,6 +109,8 @@ public class ValidateCodeUtil {
             case 4:
                 s = generateCode4(codeX,codeY,codeCount, gd);
                 break;
+            default:
+                throw new IllegalStateException("Unexpected value: " + type);
         }
         System.err.println("text:" + s);
         gd.dispose();
@@ -188,4 +193,7 @@ public class ValidateCodeUtil {
         g.drawString(String.valueOf(x + y), 5 * codeX, codeY);
         return sRand;
     }
+
+
+
 }

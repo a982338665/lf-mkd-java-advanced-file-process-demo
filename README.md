@@ -253,3 +253,7 @@
                      }
                  }
     文件属性访问：详见D:\BaiduNetdiskDownload\1803短信\untitled\src\pers\li\io\nio\AttributeViewTest.java
+
+**9.验证码：数字，字符，行为验证码等**
+    
+    ValidateCodeUtil 工具类查看
